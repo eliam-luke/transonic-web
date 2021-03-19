@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TRANSONIC書店　在庫管理システム</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <h2>在庫管理</h2>
+    <div class="box">
+        <table th:object="${data}">
+            <tr><th>・ISBN</th><td th:text="*{isbn}">XXXX</td></tr>
+            <tr><th>・タイトル</th><td　th:text="*{title}">XXXX</td></tr>
+            <tr><th></th><td></td></tr>
+            <tr><th>・ジャンル</th><td th:text="*{genre}">XXXX</td></tr>
+            <tr><th>・著者</th><td th:text="*{author}">XXXX</td></tr>
+            <tr><th>・出版社</th><td th:text="*{publisher}">XXXX</td></tr>
+            <tr><th>・発行年</th><td th:text="*{publicationYear}">XXXX</td></tr>
+        </table>
+    </div>
+    <a href="/"><button type="button">戻る</button></a>
+</body>
+</html>

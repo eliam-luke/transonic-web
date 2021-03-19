@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TRANSONIC書店　在庫管理システム</title>
+    <meta http-equiv="Content-Type" charset="UTF-8" />
+</head>
+<body>
+<!------------------------------1ブロック----------------------------------->
+    <h2>在庫管理</h2>
+    <div class="box">
+        <table th:object="${data}">
+            <tr><th>・ISBN</th><td th:text="*{isbn}">XXXX</td></tr>
+            <tr><th>・タイトル</th><td　th:text="*{title}">YYYY</td></tr>
+            <tr><th>・単価</th><td th:text="*{unitPrice}">ZZZZ</td></tr>
+        </table>
+    </div>
+<!------------------------------2ブロック----------------------------------->
+    <form method="post" action="/order" >
+        <p th:object="${data}"><input type="hidden" name="isbn" th:value="*{isbn}" /></p>
+        <p>・注文個数　：<input type="number" name="numOfOrder" value="1" min="1" max="100" required /></p>
+        <input type="submit" name="submit" value="登録"　/>
+    </form>
+    <br />
+    <a href="/"><button type="button">戻る</button></a>
+    <hr />
+<!------------------------------3ブロック----------------------------------->
+    <h3>デバッグ用 - 注文マスタ</h3>
+    <table width="470">
+        <tr><th>注文番号</th><th>ISBN</th><th>注文日</th><th>注文数</th><th>フラグ</th></tr>
+        <tr th:each="obj : ${oooolist}">
+            <td align="center" th:text="${obj.id}"></td>
+            <td align="center" th:text="${obj.isbn}"></td>
+            <td align="center" th:text="${obj.orderDate}"></td>
+            <td align="center" th:text="${obj.numOfOrder}"></td>
+            <td align="center" th:text="${obj.ReceiptFlg}"></td>
+        </tr>
+    </table>
+    <br />    
+</body>
+</html>

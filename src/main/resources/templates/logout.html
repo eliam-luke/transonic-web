@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>main</title>
+</head>
+<body>
+<h1>Hello</h1>
+<h3 th:text="${userId}"></h3>
+<form role="form" id="logout" th:action="@{/logout}" method="post">
+    <button type="submit">ログアウト</button>
+</form>
+</body>
+</html>

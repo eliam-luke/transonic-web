@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.themeleaf.org">
+<head>
+    <title>TRANSONIC書店　在庫管理システム</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" media="all" th:href="@{/css/index.css}"/>
+</head>
+<body>
+    <h3 th:text="${username}"></h3>
+    <form role="form" id="logout" th:action="@{/logout}" method="post">
+        <button type="submit">ログアウト</button>
+    </form>
+    <h2>在庫管理</h2>
+    <div class="box">
+    <p>条件を記入してください</p>
+    <form method="post" action="/" th:object="${formModel}">
+        <p><label for="genre">ジャンル：</label>
+            <select name="genre">
+                <option selected th:text="*{genre}"></option>
+                <option value="文学">文学</option>
+                <option value="推理">推理</option>
+                <option value="エッセイ">エッセイ</option>
+                <option value="プログラミング">プログラミング</option>
+            </select></p>
+        <p><label for="isbn">ＩＳＢＮ： </label><input type="search" name="isbn" th:value="*{isbn}" /></p>
+        <p><label for="author">著者　　： </label><input type="search" name="author" th:value="*{author}" /></p>
+        <p><label for="title">タイトル： </label><input type="search" name="title" th:value="*{title}" /></p>
+        <input type="submit" name="submit" value="検索"　/>
+    </form>
+    <a href="/"><button type="button">全データ表示</button></a>
+    </div>
+    <hr />
+    <table>
+        <tr><th>ISBN番号</th><th>タイトル</th><th>著者名</th><th>在庫数</th><th>注文状態</th><th>注文日</th><th>注文</th><th>納品</th></tr>
+        <tr th:each="obj : ${booklist}">
+            <td align="center"><a href="/detail" th:href="@{/detail/{isbn}(isbn=${obj.isbn})}" th:text="${obj.isbn}" ></a></td>
+            <td align="left" th:text="${obj.title}"></td>
+            <td align="left" th:text="${obj.author}"></td>
+            <td align="center" th:text="${obj.stock}"></td>
+            <td align="center" th:text="${obj.genre}"></td>
+            <td align="center" ></td>
+            <td align="center" ><a href="/order" th:href="@{/order/{isbn}(isbn=${obj.isbn})}">●</a></td>
+            <td align="center" ><a href="/delivery" th:href="@{/delivery/{isbn}(isbn=${obj.isbn})}">●</a></td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -6,7 +6,7 @@ import com.example.transonicweb.domain.product.Product;
 import com.example.transonicweb.domain.product.ProductRepository;
 import com.example.transonicweb.domain.user.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,10 +20,10 @@ public class StockController {
 
     @GetMapping("/stock")
     public ModelAndView stock(@ModelAttribute("formModel") Product product,
-        ModelAndView mav, Authentication auth) {
+        ModelAndView mav) {
         // 認証情報を取得
-        LoginUser user = (LoginUser)auth.getPrincipal();
-        mav.addObject("username", user.getName());
+        LoginUser loginUser = (LoginUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();;
+        mav.addObject("username", loginUser.getUsername());
         mav.setViewName("stock");
         Iterable<Product> list = productRepository.findAll();
 		mav.addObject("booklist",list);

@@ -1,17 +1,31 @@
 package com.example.transonicweb;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
  
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
  
+    @Autowired
+    private UserDetailsService userDetailsServiceImpl;
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        // テストのためパスワードの暗号化はしない
+        return NoOpPasswordEncoder.getInstance();
+    }
+
     @Override
     public void configure(WebSecurity web) {
         //org.springframework.security.web.firewall.RequestRejectedException:
@@ -58,7 +72,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //ユーザー名「user」、パスワード「pass」が入力されたらログイン可能とする
         //パスワードエンコーダーを利用しないようにするため、パスワードの先頭に{noop}を
         //指定している
-        auth.inMemoryAuthentication()
-                .withUser("user").password("{noop}pass").roles("USER");
+        // auth.inMemoryAuthentication()
+        //         .withUser("user").password("{noop}pass").roles("USER");
+        auth.userDetailsService(userDetailsServiceImpl);
     }
 }

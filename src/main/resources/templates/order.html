@@ -15,13 +15,13 @@
         </table>
     </div>
 <!------------------------------2ブロック----------------------------------->
-    <form method="post" action="/order" >
+    <form method="post" th:action="@{/order}" >
         <p th:object="${data}"><input type="hidden" name="isbn" th:value="*{isbn}" /></p>
         <p>・注文個数　：<input type="number" name="numOfOrder" value="1" min="1" max="100" required /></p>
         <input type="submit" name="submit" value="登録"　/>
     </form>
     <br />
-    <a href="/"><button type="button">戻る</button></a>
+    <a href="/stock"><button type="button">戻る</button></a>
     <hr />
 <!------------------------------3ブロック----------------------------------->
     <h3>デバッグ用 - 注文マスタ</h3>

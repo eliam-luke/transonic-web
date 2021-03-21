@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import lombok.extern.apachecommons.CommonsLog;
+
 @Controller
+@CommonsLog
 public class OrderController {
     @Autowired
 	ProductRepository productRepository;
@@ -25,7 +28,8 @@ public class OrderController {
 
     @PostMapping("/order")
     public ModelAndView create(@ModelAttribute Order order,
-        ModelAndView mav) {
+        ModelAndView mav) throws Exception {
+        log.debug("creat an order");
         mav.setViewName("order");
         order.setOrderDate(new Date());
         order.setReceiptFlg(false);
@@ -35,7 +39,8 @@ public class OrderController {
 
     @GetMapping(value="/order/{isbn}")
 	public ModelAndView detail(@PathVariable("isbn") String isbn, 
-			ModelAndView mav) {
+			ModelAndView mav) throws Exception {
+        log.debug("show an order");
 		mav.setViewName("order");
 		Optional<Product> data = productRepository.findByIsbn(isbn);
 		mav.addObject("data",data.get());

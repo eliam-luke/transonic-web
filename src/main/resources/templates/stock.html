@@ -3,7 +3,7 @@
 <head>
     <title>TRANSONIC書店　在庫管理システム</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" media="all" th:href="@{/css/index.css}"/>
+    <!-- <link rel="stylesheet" media="all" th:href="@{/css/index.css}"/> -->
 </head>
 <body>
     <h3 th:text="${username}"></h3>
@@ -27,7 +27,7 @@
         <p><label for="title">タイトル： </label><input type="search" name="title" th:value="*{title}" /></p>
         <input type="submit" name="submit" value="検索"　/>
     </form>
-    <a href="/"><button type="button">全データ表示</button></a>
+    <a href="/stock"><button type="button">全データ表示</button></a>
     </div>
     <hr />
     <table>

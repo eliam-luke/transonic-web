@@ -53,10 +53,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 //ログイン画面のcssファイルとしても共通のdemo.cssを利用するため、
                 //src/main/resources/static/cssフォルダ下は常にアクセス可能とする
-                .authorizeRequests().antMatchers("/", "/health").permitAll()
+                .authorizeRequests().antMatchers("/", "/health", "/timeout").permitAll()
                 .and()    //かつ
                 //それ以外の画面は全て認証を有効にする
                 .authorizeRequests().anyRequest().authenticated()
+                .and()
+                .sessionManagement().invalidSessionUrl("/timeout")
                 .and()    //かつ
                 //ログアウト時はログイン画面に遷移する
                 .logout().logoutSuccessUrl("/login").permitAll();

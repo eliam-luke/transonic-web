@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(basePackages = "com.example.transonicweb.domain")
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
-public class JpaDataSourceConfig {
+public class MySqlDataSourceConfig {
 
     @Autowired
     private Environment env;
@@ -31,8 +31,8 @@ public class JpaDataSourceConfig {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
         dataSource.setUrl(env.getProperty("jdbc.url"));
-        dataSource.setUsername(env.getProperty("jdbc.user"));
-        dataSource.setPassword(env.getProperty("jdbc.pass"));
+        dataSource.setUsername(env.getProperty("jdbc.username"));
+        dataSource.setPassword(env.getProperty("jdbc.password"));
 
         return dataSource;
     }
@@ -58,7 +58,7 @@ public class JpaDataSourceConfig {
         final Properties hibernateProperties = new Properties();
 
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-        hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+//        hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
         hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         hibernateProperties.setProperty("hibernate.cache.use_second_level_cache", env.getProperty("hibernate.cache.use_second_level_cache"));
         hibernateProperties.setProperty("hibernate.cache.use_query_cache", env.getProperty("hibernate.cache.use_query_cache"));

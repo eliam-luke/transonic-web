@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <link th:href="@{/css/login.css}" rel="stylesheet" type="text/css" />
-    <title>ログイン画面</title>
+<meta charset="UTF-8">
+<link th:href="@{/css/default.css}" rel="stylesheet" type="text/css" />
+<title>TRANSONIC書店　在庫管理システム</title>
 </head>
 <body>
-    <div th:if="${param.error}" class="errorMessage">
-        ユーザー名またはパスワードが誤っています。
-    </div>
-   　<form method="post" th:action="@{/login}">
-       <table border="0">
-           <tr>
-               <td align="left" valign="top">ユーザー名：</td>
-               <td>
-                   <input type="text" id="username" name="username" />
-               </td>
-           </tr>
-           <tr>
-               <td align="left" valign="top">パスワード：</td>
-               <td>
-                   <input type="password" id="password" name="password" />
-               </td>
-           </tr>
-       </table>
-       <br/><br/>
-       <input type="submit" value="ログイン" />
-   </form>
+ <div id="content">
+ <p id="breadcrumb"></p>
+ <h2 id="h2">ログイン</h2>
+  <div th:if="${param.error}" class="errorMessage">
+   ユーザー名またはパスワードが誤っています。</div>
+  <form method="post" th:action="@{/login}">
+   <table border="0">
+    <tr>
+     <td align="left" valign="top">ユーザー名：</td>
+     <td><input type="text" id="username" name="username" /></td>
+    </tr>
+    <tr>
+     <td align="left" valign="top">パスワード：</td>
+     <td><input type="password" id="password" name="password" /></td>
+    </tr>
+   </table>
+   <br /> <br /> <input type="submit" value="ログイン" />
+  </form>
+ </div>
+ <div id="menu">
+  <h1 id="h1">
+   Transonic <span class="version">1.0.0</span>
+  </h1>
+ </div>
 </body>
 </html>

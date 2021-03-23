@@ -7,6 +7,7 @@ import com.example.transonicweb.domain.order.Order;
 import com.example.transonicweb.domain.order.OrderRepository;
 import com.example.transonicweb.domain.product.Product;
 import com.example.transonicweb.domain.product.ProductRepository;
+import com.example.transonicweb.interactor.order.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,8 @@ public class OrderController {
 	ProductRepository productRepository;
     @Autowired
 	OrderRepository orderRepository;
+    @Autowired
+    OrderService orderService;
 
     @PostMapping("/order")
     public ModelAndView create(@ModelAttribute Order order,
@@ -33,7 +36,7 @@ public class OrderController {
         mav.setViewName("order");
         order.setOrderDate(new Date());
         order.setReceiptFlg(false);
-        orderRepository.save(order);
+        orderService.create(order);
         return new ModelAndView("redirect:/order/" + order.getIsbn());
     }
 
@@ -44,7 +47,7 @@ public class OrderController {
 		mav.setViewName("order");
 		Optional<Product> data = productRepository.findByIsbn(isbn);
 		mav.addObject("data",data.get());
-        Iterable<Order> list = orderRepository.findAll();
+        Iterable<Order> list = orderService.load();
 		mav.addObject("oooolist",list);
 		return mav;
 	}

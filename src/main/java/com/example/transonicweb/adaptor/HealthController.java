@@ -13,4 +13,11 @@ public class HealthController {
         model.addAttribute("name", name);
         return "health";
     }
+    
+    @GetMapping("/error")
+    public String error(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
+            Model model) {
+        model.addAttribute("name", name);
+        return "error";
+    }
 }

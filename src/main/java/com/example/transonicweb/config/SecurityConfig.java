@@ -1,4 +1,4 @@
-package com.example.transonicweb;
+package com.example.transonicweb.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -45,23 +45,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //初期表示画面を表示する際にログイン画面を表示する
-        http.formLogin()
-                //ログイン画面は常にアクセス可能とする
-                .loginPage("/login").permitAll()
-                //ログインに成功したら在庫画面に遷移する
-                .defaultSuccessUrl("/stock")
-                .and()
-                //ログイン画面のcssファイルとしても共通のdemo.cssを利用するため、
-                //src/main/resources/static/cssフォルダ下は常にアクセス可能とする
-                .authorizeRequests().antMatchers("/", "/health", "/timeout").permitAll()
-                .and()    //かつ
-                //それ以外の画面は全て認証を有効にする
-                .authorizeRequests().anyRequest().authenticated()
-                .and()
-                .sessionManagement().invalidSessionUrl("/timeout")
-                .and()    //かつ
-                //ログアウト時はログイン画面に遷移する
-                .logout().logoutSuccessUrl("/login").permitAll();
+        http
+            //ログイン画面のcssファイルとしても共通のdemo.cssを利用するため、
+            //src/main/resources/static/cssフォルダ下は常にアクセス可能とする
+            .authorizeRequests()
+            .mvcMatchers("/", "/health").permitAll()
+            .mvcMatchers("/error/**").permitAll()
+            //それ以外の画面は全て認証を有効にする
+            .anyRequest().authenticated()
+            .and()
+            .formLogin()
+            //ログイン画面は常にアクセス可能とする
+            .loginPage("/login").permitAll()
+            //ログインに成功したら在庫画面に遷移する
+            .defaultSuccessUrl("/stock")
+            .and()
+            //ログアウト時はログイン画面に遷移する
+            .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login");
+//            .and()    //かつ
+//            .sessionManagement()
+//            .invalidSessionUrl("/error/timeout")
+//                .maximumSessions(1)
+//                .expiredUrl("/error/timeout");
     }
  
     /**

@@ -1,17 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>エラー</title>
+<meta charset="UTF-8">
+<title>エラー画面</title>
 </head>
 <body>
-  <div th:text="'timestamp: ' + ${timestamp}"></div>
-  <div th:text="'status: ' + ${status}"></div>
-  <div th:text="'error: ' + ${error}"></div>
-  <div th:text="'exception: ' + ${exception}"></div>
-  <div th:text="'message: ' + ${message}"></div>
-  <div th:text="'errors: ' + ${errors}"></div>
-  <div th:text="'trace: ' + ${trace}"></div>
-  <div th:text="'path: ' + ${path}"></div>
+ <h1 th:text="${status} + ' ' + ${error}">エラーステータス</h1>
+ <p>
+  エラーが発生しました。下記メッセージを確認してください。<br />
+  <br />
+ </p>
+ <div th:text="'timestamp: ' + ${timestamp}"></div>
+ <div th:text="'status: ' + ${status}"></div>
+ <div th:text="'error: ' + ${error}"></div>
+ <div th:text="'exception: ' + ${exception}"></div>
+ <div th:text="'message: ' + ${message}"></div>
+ <div th:text="'errors: ' + ${errors}"></div>
+ <div th:text="'trace: ' + ${trace}"></div>
+ <div th:text="'path: ' + ${path}"></div>
+ <br />
+ <br />
+ <form method="get" th:action="@{/}">
+  <input type="submit" value="戻る" />
+ </form>
 </body>
 </html>

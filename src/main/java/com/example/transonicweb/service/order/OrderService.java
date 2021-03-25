@@ -1,4 +1,4 @@
-package com.example.transonicweb.interactor.order;
+package com.example.transonicweb.service.order;
 
 import com.example.transonicweb.domain.order.Order;
 

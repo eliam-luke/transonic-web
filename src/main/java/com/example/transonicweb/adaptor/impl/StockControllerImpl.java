@@ -1,7 +1,8 @@
-package com.example.transonicweb.adaptor;
+package com.example.transonicweb.adaptor.impl;
 
 import java.util.Optional;
 
+import com.example.transonicweb.adaptor.StockController;
 import com.example.transonicweb.domain.product.Product;
 import com.example.transonicweb.domain.product.ProductRepository;
 import com.example.transonicweb.domain.user.LoginUser;

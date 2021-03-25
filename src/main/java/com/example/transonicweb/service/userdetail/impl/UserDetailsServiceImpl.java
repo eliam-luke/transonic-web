@@ -1,4 +1,4 @@
-package com.example.transonicweb.interactor.user;
+package com.example.transonicweb.service.userdetail.impl;
 
 import java.util.Collection;
 import java.util.Collections;

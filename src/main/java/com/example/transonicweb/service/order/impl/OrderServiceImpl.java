@@ -1,10 +1,12 @@
-package com.example.transonicweb.interactor.order;
+package com.example.transonicweb.service.order.impl;
 
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.transonicweb.domain.order.Order;
 import com.example.transonicweb.domain.order.OrderRepository;
+import com.example.transonicweb.service.order.OrderService;
+
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
